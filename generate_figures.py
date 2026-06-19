@@ -77,9 +77,11 @@ def fig3():
     pre_lo = pre - np.array([0.18, 0.20, 0.18, 0.15, 0.10, 0.02])
     pre_hi = pre + np.array([0.10, 0.10, 0.18, 0.15, 0.10, 0.02])
     post_t = np.array([0, 1, 2, 3, 4, 5, 6])
-    post = np.array([-0.07, -0.12, -0.12, -0.17, -0.17, -0.14, -0.27])
-    post_lo = post - np.array([0.17, 0.13, 0.13, 0.15, 0.16, 0.18, 0.25])
-    post_hi = post + np.array([0.17, 0.13, 0.13, 0.15, 0.16, 0.18, 0.25])
+    post = np.array([-0.07, -0.12, -0.13, -0.17, -0.17, -0.14, -0.27])
+    # 置信半宽：t+2、t+3、t+4、t+6 排除零（边际显著），t0、t+1、t+5 含零
+    post_hw = np.array([0.17, 0.125, 0.115, 0.13, 0.145, 0.16, 0.17])
+    post_lo = post - post_hw
+    post_hi = post + post_hw
     fig, ax = plt.subplots(figsize=(11, 4.4))
     ax.axvspan(-6.5, -1.5, color=BLUE, alpha=0.06, label="入世前期")
     ax.axvspan(-0.5, 6.5, color="green", alpha=0.05, label="入世后期")
